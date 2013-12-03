@@ -1,0 +1,22 @@
+Seq (Seq a b) c => Seq a (Seq b c);
+
+Tag q (Tag q a)         => Tag q a;
+Seq (Tag q (Tag q a)) b => Seq (Tag q a) b;
+
+Seq (Tag q a) (Tag q b) => Tag q (Seq a b);
+
+Tag Maj  (Tag Emph a) => Tag Emph (Tag Maj  a);
+Tag Emph (Tag Bold a) => Tag Bold (Tag Emph a);
+Tag Maj  (Tag Bold a) => Tag Bold (Tag Maj  a);
+
+Seq (Tag Maj  (Tag Emph a)) b => Seq (Tag Emph (Tag Maj  a)) b;
+Seq (Tag Emph (Tag Bold a)) b => Seq (Tag Bold (Tag Emph a)) b;
+Seq (Tag Maj  (Tag Bold a)) b => Seq (Tag Bold (Tag Maj  a)) b;
+
+Seq (Tag q (Seq a b)) c                 => Seq (Tag q a) (Seq (Tag q b) c);
+Seq (Tag p (Tag q (Seq a b))) c         => Seq (Tag p (Tag q a)) (Seq (Tag p (Tag q b)) c);
+Seq (Tag p (Tag q (Tag r (Seq a b)))) c => Seq (Tag p (Tag q (Tag r a))) (Seq (Tag p (Tag q (Tag r b))) c);
+
+SNF x => x;
+
+.
