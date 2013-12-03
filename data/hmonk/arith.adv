@@ -1,0 +1,16 @@
+Add Z x => x;
+Add (S x) y => S (Add x y);
+Add (Add x y) z => Add x (Add y z);
+Add (Mult (S x) y) z => Add y (Add (Mult x y) z);
+Add (Mult Z x) y => y;
+
+Mult Z x => Z;
+Mult (S x) (S y) => S (Add x (Add y (Mult x y)));
+Mult (S x) y => Add y (Mult x y);
+Mult (Mult (S x) y) z => Mult (Add y (Mult x y)) z;
+Mult (Add (S x) y) z => Add (Add z (Mult x z)) (Mult y z); 
+Mult (Add Z x) y => Mult x y;
+
+Compute x => x;
+
+.
